@@ -2,7 +2,7 @@
  * @Project Name:testMQ
  * @Package Name:com.zx.jms.queue
  */
-package com.zx.jms.queue;
+package com.zx.jms.topic;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
@@ -17,8 +17,16 @@ import javax.jms.*;
 public class AppConsumer {
     private static final String url = "tcp://127.0.0.1:61616";
 
-    private static final String queue_name = "queue_test";
+    private static final String topic_name = "topic_test";
 
+    /**
+     *@Description: 需要先启动消费者，再启动生产者；
+     *@Author: ZC
+     *@Email: chao_actor@163.com
+     *@TIME： 2018/10/7 21:27
+     *@Params: [args]
+     *@ReturnType: void
+     */
     public static void main(String[] args) throws JMSException {
         //        创建连接工厂；
         ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory(url);
@@ -29,9 +37,9 @@ public class AppConsumer {
 //        创建会话；事务、应答模式
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 //        创建目的地
-        Queue queue = session.createQueue(queue_name);
+        Topic topic = session.createTopic(topic_name);
 //        创建消费者
-        MessageConsumer consumer = session.createConsumer(queue);
+        MessageConsumer consumer = session.createConsumer(topic);
 //        创建监听器
         consumer.setMessageListener(new MessageListener() {
             @Override
@@ -44,9 +52,5 @@ public class AppConsumer {
                 }
             }
         });
-
-//        关闭会话和连接:监听器是一个异步的线程，如果关闭了连接则无法正确获取消息；
-//        session.close();
-//        connection.close();
     }
 }
