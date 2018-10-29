@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Spring_JMS.iml" filepath="$PROJECT_DIR$/Spring_JMS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springactivemq/activemq-queue.iml" filepath="$PROJECT_DIR$/springactivemq/activemq-queue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/activemq-top/activemq-topic.iml" filepath="$PROJECT_DIR$/activemq-top/activemq-topic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/activemq-java/activemqjava.iml" filepath="$PROJECT_DIR$/activemq-java/activemqjava.iml" />
+    </modules>
+  </component>
+</project>

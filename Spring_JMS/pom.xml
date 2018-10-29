@@ -11,6 +11,8 @@
 
     <modules>
         <module>springactivemq</module>
+        <module>activemq-top</module>
+        <module>activemq-java</module>
     </modules>
 
     <dependencies>

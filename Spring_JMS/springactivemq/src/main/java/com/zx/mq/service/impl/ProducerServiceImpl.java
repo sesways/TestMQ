@@ -1,11 +1,10 @@
 /**
  * @Project Name:Spring_JMS
- * @Package Name:com.zx.mq.service.imp
+ * @Package Name:com.zx.mq.service.impl
  */
-package com.zx.mq.service.imp;
+package com.zx.mq.service.impl;
 
 import com.zx.mq.service.ProducerService;
-import org.apache.activemq.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;

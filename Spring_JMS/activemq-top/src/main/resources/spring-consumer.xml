@@ -4,6 +4,13 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <import resource="jms-commons.xml" />
-    <!--提供者-->
-    <bean id="producerService" class="com.zx.mq.service.impl.ProducerServiceImpl"></bean>
+    <!--sonsumer-->
+    <bean id="consumer" class="com.zx.mq.comsumer.TopicConsumer"></bean>
+    <!--监听器容器-->
+    <bean id="jmsContainer"
+          class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="cachingConnectionFactory"/>
+        <property name="destination" ref="activeMQTopic"/>
+        <property name="messageListener" ref="consumer"/>
+    </bean>
 </beans>
