@@ -1,0 +1,51 @@
+场景：
+有三个MQ节点：A，B，C。其中B和C作为主从节点，可以进行消息的发布和消息的消费，A节点作为备份节点可以用来做消息的消费，主要进行消息同步，即AB同步，AC同步；BC节点通过共享文件进行主从；
+
+配置：
+A的配置：端口61616，连接61617,61618
+	<transportConnectors>
+		<!-- DOS protection, limit concurrent connections to 1000 and frame size to 100MB -->
+		<transportConnector name="openwire" uri="tcp://0.0.0.0:61616?maximumConnections=1000&amp;wireFormat.maxFrameSize=104857600"/>
+	</transportConnectors>
+
+	<networkConnectors>
+			<networkConnector name="networkConnector_A" uri="static:(tcp://127.0.0.1:61617,tcp://127.0.0.1:61618)" />
+	</networkConnectors>
+B的配置：端口61617，连接61616，持久化文件位置
+	<persistenceAdapter>
+		<kahaDB directory="D:/install/activemq-cluster/data/kahadb"/>
+	</persistenceAdapter>
+
+	<transportConnectors>
+		<!-- DOS protection, limit concurrent connections to 1000 and frame size to 100MB -->
+		<transportConnector name="openwire" uri="tcp://0.0.0.0:61617?maximumConnections=1000&amp;wireFormat.maxFrameSize=104857600"/>
+	</transportConnectors>
+
+	<networkConnectors>
+			<networkConnector name="networkConnector_A" uri="static:(tcp://127.0.0.1:61616)" />
+	</networkConnectors>
+C的配置：端口61618，连接61616，持久化文件位置
+	<persistenceAdapter>
+		<kahaDB directory="D:/install/activemq-cluster/data/kahadb"/>
+	</persistenceAdapter>
+
+	<transportConnectors>
+		<!-- DOS protection, limit concurrent connections to 1000 and frame size to 100MB -->
+		<transportConnector name="openwire" uri="tcp://0.0.0.0:61617?maximumConnections=1000&amp;wireFormat.maxFrameSize=104857600"/>
+	</transportConnectors>
+
+	<networkConnectors>
+			<networkConnector name="networkConnector_A" uri="static:(tcp://127.0.0.1:61616)" />
+	</networkConnectors>
+	
+#配置管理器的端口，修改jetty.xml中的端口号，如：8162
+<bean id="jettyPort" class="org.apache.activemq.web.WebConsolePort" init-method="start">
+	<property name="host" value="0.0.0.0"/>
+	<property name="port" value="8162"/>
+</bean>
+
+#java的url连接方式
+#生产者
+private static final String url = "failover:(tcp://127.0.0.1:61617,tcp://127.0.0.1:61618)?randomize=true";
+#消费者
+private static final String url = "failover:(tcp://127.0.0.1:61616,tcp://127.0.0.1:61617,tcp://127.0.0.1:61618)?randomize=true";

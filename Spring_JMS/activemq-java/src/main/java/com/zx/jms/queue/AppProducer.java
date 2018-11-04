@@ -15,7 +15,8 @@ import javax.jms.*;
  * @data: 2018/10/4 17:19
  */
 public class AppProducer {
-    private static final String url = "tcp://127.0.0.1:61616";
+//    private static final String url = "tcp://127.0.0.1:61616";
+    private static final String url = "failover:(tcp://127.0.0.1:61617,tcp://127.0.0.1:61618)?randomize=true";
 
     private static final String queue_name = "queue_test";
 

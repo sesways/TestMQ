@@ -6,16 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="activemq-java" />
         <module name="activemq-queue" />
         <module name="activemq-topic" />
-        <module name="activemqjava" />
         <module name="springactivemq" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="activemq-java" target="1.8" />
       <module name="activemq-queue" target="1.8" />
       <module name="activemq-topic" target="1.8" />
-      <module name="activemqjava" target="1.8" />
       <module name="Spring_JMS" target="1.8" />
     </bytecodeTargetLevel>
   </component>
