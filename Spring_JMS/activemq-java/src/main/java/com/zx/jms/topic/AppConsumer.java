@@ -42,7 +42,6 @@ public class AppConsumer {
         MessageConsumer consumer = session.createConsumer(topic);
 //        创建监听器
         consumer.setMessageListener(new MessageListener() {
-            @Override
             public void onMessage(Message message) {
                 TextMessage textMessage = (TextMessage) message;
                 try {
