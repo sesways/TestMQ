@@ -15,7 +15,9 @@ import javax.jms.*;
  * @data: 2018/10/6 13:36
  */
 public class AppConsumer {
+    //单节点
     private static final String url = "tcp://127.0.0.1:61616";
+    //集群
 //    private static final String url = "failover:(tcp://127.0.0.1:61616,tcp://127.0.0.1:61617,tcp://127.0.0.1:61618)?randomize=true";
 
     private static final String queue_name = "queue_test";
